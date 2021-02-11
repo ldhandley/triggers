@@ -7,10 +7,17 @@
 (require-mod hierarchy)
 (require-mod spawners)
 
-(define-classic-rune (trigger-zone exp)
+(define (trigger-zone-rune-img)
+  (overlay
+   (above
+    (beside (rotate -135 (arrow)) (padding 40))
+    (padding 40))
+   (circle 30 'solid 'cyan)))
+
+(define-classic-rune (trigger exp)
   #:background "blue"
-  #:foreground (circle 40 'solid 'blue)
- ; (thunk
+  #:foreground (trigger-zone-rune-img) 
+ (thunk
   (unreal-js @~a{
  (function(){
   var actor = new StaticMeshActor(GWorld, {X:@(current-x), Y:@(current-z), Z:@(current-y)});
@@ -48,11 +55,12 @@
     return actor;
   })()
 
- });)
+ }))
   )
 
 (define-classic-rune-lang my-mod-lang #:eval-from main.rkt
-  (trigger-zone))
+  (trigger))
+
 
 (module+ main
   (codespells-workspace ;TODO: Change this to your local workspace if different
@@ -67,5 +75,4 @@
                      (hierarchy:my-mod-lang)
                      (spawners:my-mod-lang)
                      (fire-particles:my-mod-lang)))))
-
 
