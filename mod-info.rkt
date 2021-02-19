@@ -1,4 +1,4 @@
-#lang racket
+#lang codespells
 
 (provide mod-name pak-folder main.rkt)
 
@@ -16,4 +16,4 @@
   main.rkt
   "main.rkt")
 
-
+(setup-mod mod-name pak-folder)
